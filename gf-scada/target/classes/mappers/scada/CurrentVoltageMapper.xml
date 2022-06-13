@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ginfon.scada.event.mapper.CurrentVoltageMapper">
+    <resultMap id="CurrentVoltageResult" type="com.ginfon.scada.entity.CurrentVoltage">
+        <result column="current" property="current"></result>
+        <result column="voltage" property="voltage"></result>
+        <result column="number" property="number"></result>
+        <result column="triggerTime" property="triggerTime"></result>
+        <result column="avgCurrent" property="avgCurrent"></result>
+        <result column="avgVoltage" property="avgVoltage"></result>
+        <result column="times" property="times"></result>
+
+    </resultMap>
+    <insert id="saveCurrentVoltage" parameterType="com.ginfon.scada.entity.CurrentVoltage">
+        INSERT INTO t_current_voltage(current,voltage,number,triggertime)  VALUES (#{current},#{voltage},#{number},#{triggerTime})
+    </insert>
+
+    <select id="selectCurrentVoltage" parameterType="com.ginfon.scada.entity.CurrentVoltage" resultMap="CurrentVoltageResult">
+        SELECT * from t_current_voltage
+    </select>
+
+    <select id="selectCurrentVoltageIn24Hours" parameterType="com.ginfon.scada.entity.CurrentVoltage" resultMap="CurrentVoltageResult">
+        SELECT DATE_FORMAT(triggertime,'%m-%d %H:00') AS times ,ROUND(AVG(current),2) as avgCurrent,ROUND(AVG(voltage),2) as avgVoltage
+        FROM t_current_voltage
+        WHERE DATE_FORMAT(triggertime,'%Y%m%d%H')>=DATE_FORMAT(DATE_SUB(
+        (SELECT MAX(triggertime)
+        FROM t_current_voltage)
+        ,INTERVAL 1 DAY),'%Y%m%d%H') GROUP BY times ORDER BY times ASC
+    </select>
+</mapper>

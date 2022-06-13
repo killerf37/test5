@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ginfon.scada.event.mapper.MsgToMapMapper">
+    <resultMap id="MsgToMapType" type="com.ginfon.scada.entity.MsgToMap">
+        <result column="ID" property="ID"></result>
+        <result column="LineNo" property="LineNo"></result>
+        <result column="LineName" property="LineName"></result>
+        <result column="MessageNo" property="MsgNo"></result>
+        <result column="MapName" property="MapNo"></result>
+    </resultMap>
+
+    <select id="selectMsgToMapList" resultMap="MsgToMapType">
+        SELECT * FROM d_msg_to_map
+    </select>
+</mapper>

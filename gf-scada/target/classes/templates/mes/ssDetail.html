@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include :: header"></head>
+<link rel="stylesheet" href="/ace/css/ace.min.css"/>
+<link th:href="@{/ajax/libs/bootstrap-table/bootstrap-table.min.css}" rel="stylesheet"/>
+<link type="text/css" href="combo.select.css"/>
+<link href="/ajax/libs/select/select2.css">
+<script type="text/javascript" src="/js/jquery.combo.select.js"></script>
+<script src="/ajax/libs/select/select2.js"></script>
+<script src="/js/jquery-1.11.3.min.js"></script>
+<script th:src="@{/js/stomp.min.js}"></script>
+<script th:src="@{/js/sockjs.min.js}"></script>
+<script type="text/javascript" th:src='@{/js/jquery.min.js}'></script>
+<script type="text/javascript" th:src='@{/js/echarts.min.js}'></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<style type="text/css">
+    #statusId {
+        margin-top: 10px;
+        margin-left: 20px;
+        font-size: large;
+        font-weight: bold;
+    }
+    /*.dowebok { position: relative; left: 50px;}*/
+    .selectNmu {
+        height: 100%;
+    }
+    .styleShow {
+        position: relative;
+    }
+</style>
+<body class="gray-bg" oncontextmenu="return false;">
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="fa fa-desktop"></i>
+            <a href="#">[[#{system.home}]]</a>
+        </li>
+        <li class="active">[[#{system.dashboard}]]</li>
+    </ul><!-- .breadcrumb -->
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="styleShow">
+                <span style="margin-left:10px; font-size: 20px;">线体颜色示意说明：</li></span>
+                <span style="margin-left:10px; font-size: 20px;">急停：<li th:id="jt" class="fa fa-circle" style="color: #FA321E"></li></span>
+                <span style="margin-left:10px; font-size: 20px;">故障：<li th:id="gz" class="fa fa-circle" style="color: #faf628"></li></span>
+                <span style="margin-left:10px; font-size: 20px;">堵包：<li th:id="db" class="fa fa-circle" style="color: #5d3cfa"></li></span>
+                <span style="margin-left:10px; font-size: 20px;">本地：<li th:id="bd" class="fa fa-circle" style="color: #faa930"></li></span>
+                <span style="margin-left:10px; font-size: 20px;">休眠,停止,就绪：<li th:id="tz" class="fa fa-circle" style="color: #808080"></li></span>
+                <span style="margin-left:10px; font-size: 20px;">运行：<li th:id="yx" class="fa fa-circle" style="color: #1cc09f"></li></span>
+                <span style="margin-left:10px; font-size: 20px;">离线：<li th:id="lx" class="fa fa-circle" style="color: #2f4050"></li></span>
+            </div>
+        </div>
+        <div class="col-sm-4" id="monitorInfo">
+            <div class="dowebok">
+                <span style="font-size: 20px;">线体号：</span>
+                <select class="selectNmu" id="sortPlanCode" name="sortPlanCode" style="margin-left:10px; font-size: 20px;" onchange="functionOnChange()"></select>
+                <input type="button" id="btnmu" class="btn-primary" value="启动" style="margin-left:10px; font-size: 20px;" onclick="request103('start')">
+                <input type="button" id="btnstop" class="btn-primary" value="停止" style="margin-left:10px; font-size: 20px;" onclick="request103('stop')">
+                <input type="button" onclick="motai()" class="btn-primary" value="线体参数设置" style="margin-left:10px; font-size: 20px;"/>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div th:utext="${blSvg}"></div>
+        </div>
+        <div  class="col-sm-12 category-list">
+            <div class="ibox-title">
+                [[#{event.reminder}]]
+                <div class="ibox-tools" id="controllBtn">
+                    <a id="hideTable" onclick="showTable()"><i class="fa fa-chevron-up"></i></a>
+                    <a id="title" onclick="getMore();"><i class="fa fa-ellipsis-h"></i></a>
+                </div>
+            </div>
+            <div style="background-color:#f1f1f1; display: none;" id="eventReminder">
+                <table class="table" border-width="0 0 1px 0" border-style="solid" border-color="black" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th>线号</th>
+                        <th>编号</th>
+                        <th>状态编号</th>
+                        <th>触发解除</th>
+                        <th>触发时间</th>
+                    </tr>
+                    </thead>
+                    <tbody id="eventReminderTable"></tbody>
+                </table>
+            </div>
+    </div>
+</div><!-- /.page-content -->
+<div th:include="include :: footer"></div>
+<script>
+    function hideTable(){
+        /*var div_h = $(window).height() - 85;
+        if (div_h != 24) {
+            $(".thumbnail").attr("width", "100%");
+            $(".thumbnail").attr("height", div_h);
+            $(".thumbnail").attr("style", "height:" + div_h + "px;");
+            $(".thumbnail").css("padding-top", (0));
+            $("#eventReminder").attr("height", 0);
+            $("#eventReminder").attr("style", "height:0px;margin-top:10px;");
+            $(".map svg").css("height",(div_h - 45) / 3 + "px")
+        }*/
+        document.getElementById('eventReminder').style.display = "none";
+
+        let str = '<a id="showTable" onclick="showTable()"><i class="fa fa-chevron-up"></i></a>'
+            +' <a id="title" onclick="getMore();"><i class="fa fa-ellipsis-h"></i></a>'
+        $("#controllBtn").html(str);
+    };
+    function showTable(){
+       /* var div_h = $(window).height() - 85;
+        if (div_h != 24) {
+            $(".thumbnail").attr("width", "100%");
+            $(".thumbnail").attr("height", div_h - 235);
+            $(".thumbnail").attr("style", "height:" + (div_h - 235) + "px;");
+            $(".thumbnail").css("padding-top", (0));
+            $(".map svg").css("height",(div_h - 235) / 3 + "px")
+            $("#tabledata").attr("height", 235);
+            $("#tabledata").attr("style", "height:235px;margin-top:10px;");
+        }*/
+        document.getElementById('eventReminder').style.display = "block";
+
+        let str = '<a id="hideTable" onclick="hideTable()"><i class="fa fa-chevron-down"></i></a>'
+            +'<a id="title" onclick="getMore();"><i class="fa fa-ellipsis-h"></i></a>';
+        $("#controllBtn").html(str);
+    };
+
+</script>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var plc = [[${plc}]];
+    var layerFlag = [[${layerFlag}]];
+    var chuteCount = [[${chuteCount}]];
+    var estopCount = [[${estopCount}]];
+    var motorCount = [[${motorCount}]];
+    var cartCount = [[${cartCount}]];
+    var inductionunitInfo = [[${inductionunitInfo}]];
+    var chutegroupCount = [[${chutegroupCount}]];
+    var chuteGroup = [[${chuteGroup}]];
+    var grayscale = [[${grayscale}]];
+    var roles = [[${roles}]];
+    var allLine=[[${allLine}]];
+    var lineNo=[[${lineNo}]];
+    var optionval=[[${option}]];
+</script>
+<script th:src="@{/js/monitor/scada.js}"></script>
+<script th:src="@{/js/monitor/chart.js}"></script>
+</body>
+</html>

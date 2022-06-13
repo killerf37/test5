@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include :: header"></head>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/ace/css/ace.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link th:href="@{/ajax/libs/bootstrap-table/bootstrap-table.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/layout.css}" rel="stylesheet"/>
+    <link type="text/css" href="combo.select.css"/>
+    <link href="/ajax/libs/select/select2.css">
+    <script type="text/javascript" th:src='@{/js/jquery.min.js}'></script>
+    <script type="text/javascript" src="/js/jquery.combo.select.js"></script>
+    <script src="/ajax/libs/select/select2.js"></script>
+    <script src="/js/jquery-1.11.3.min.js"></script>
+    <script th:src="@{/js/stomp.min.js}"></script>
+    <script th:src="@{/js/sockjs.min.js}"></script>
+    <script type="text/javascript" th:src='@{/js/echarts.min.js}'></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <title>输送线列表</title>
+</head>
+<body>
+<div class="wrapper wrapper-content" style="background: #f5f5f5;">
+    <div class="row">
+        <div class="col-lg-12">
+            <i id="openScreen" onclick="openScreen();" class="fa fa-arrows-alt"
+               style="float:right;font-size: large;"></i>
+            <i id="closeScreen" onclick="closeScreen();" class="fa fa-compress"
+               style="float:right;display: none;font-size: large;"></i>
+        </div>
+        <div class="col-lg-12" >
+            <div th:each="map,stat:${res}">
+                <div class="col-sm-2"  th:each="item:${map.value}"style="margin-top: 10px; margin-bottom: 20px;">
+                <a th:onclick="detail([[${item.lineName}]])"  target="_blank">
+                    <div th:attr="data-f=${item.lineName}" class="map">
+                        <div th:id="${item.url}" class="circle"></div>
+                        <div th:utext="${item.svg}" ></div>
+                    </div>
+                </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 category-list">
+            <div class="ibox-title">
+                [[#{event.reminder}]]
+                <div class="ibox-tools" id="controllBtn">
+                    <a id="hideTable" onclick="hideTable()"><i class="fa fa-chevron-down"></i></a>
+                    <a id="title" onclick="getMore();"><i class="fa fa-ellipsis-h"></i></a>
+                </div>
+            </div>
+            <div style="background-color:#f1f1f1;" id="eventReminder" >
+                <table class="table" border-width="0 0 1px 0" border-style="solid" border-color="black" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th>线号</th>
+                        <th>编号</th>
+                        <th>状态编号</th>
+                        <th>触发解除</th>
+                        <th>触发时间</th>
+                    </tr>
+                    </thead>
+                    <tbody id="eventReminderTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+   /* var maplineNo = [[${lineNameNo}]];//CA:01 CB:02这种，线体名称和线号
+    var mapNo = [[${mapNo}]];//1:CA.SVG  2：CB.svg这种,表示文件序号
+    var lineNoName = [[${lineNoName}]];//01:CA  02:CB这种
+    var eleNameMap = [[${elename}]];//元素名称map，key为type，value为elename
+    var errinfo=[[${errinfo}]];//异常信息
+    var errdescrib=[[${errdescrib}]];//异常信息描述//传递设备异常描述<type:<异常码Int:异常信息String>>
+    var typedescrib=[[${typedescrib}]];//种类描述//传递设备类型名称<type:类型名称String>
+    var eventQueryName = [[${@messageUtils.message("event.query")}]];
+    var lineNo=[[${lineNo}]];
+    var lineip=[[${lineip}]]*/
+   var allLine=[[${allLine}]];
+   var lineNo=[[${lineNo}]];
+   var optionval=[[${option}]];
+   //详情信息展示
+   function detail(lineName) {
+       let url = "/shuSong/detailShow/" + lineName;
+       window.location.href = url;
+   }
+</script>
+<div th:include="include :: footer"></div>
+<script th:src="@{/js/chart1.js}"></script>
+<script th:src="@{/js/monitor/scada.js}"></script>
+</body>
+</html>

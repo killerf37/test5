@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="cn">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/ace/css/ace.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link th:href="@{/ajax/libs/bootstrap-table/bootstrap-table.min.css}" rel="stylesheet"/>
+    <link type="text/css" href="combo.select.css"/>
+    <link href="/ajax/libs/select/select2.css">
+    <script type="text/javascript" th:src='@{/js/jquery.min.js}'></script>
+    <script type="text/javascript" src="/js/jquery.combo.select.js"></script>
+    <script src="/ajax/libs/select/select2.js"></script>
+    <script src="/js/jquery-1.11.3.min.js"></script>
+    <script th:src="@{/js/stomp.min.js}"></script>
+    <script th:src="@{/js/sockjs.min.js}"></script>
+    <script type="text/javascript" th:src='@{/js/echarts.min.js}'></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <title>Title</title>
+    <style>
+        #mainMiddle{
+
+            margin: 10px 10px 10px 10px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .compent{
+            /*border: 1px solid green;*/
+            display: inline-block;
+            margin: 10px 10px;
+        }
+
+        .status-online{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #1eacae;
+            margin: 10px 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="mainMiddle">
+    <div th:each="i:${#numbers.sequence(1,bailunInfo.size())}" style="display:inline-block;">
+        <div style="width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            background: #808080;
+            text-align: center;
+            margin: 15px 35px;" th:id="${'Connect-' + bailunInfo.get(i-1).getDeviceId()}"></div>
+        <div th:text="${bailunInfo.get(i-1).getPlc()}" style="margin: 0 20px;font-size: 20px;font-family: 'Microsoft YaHei UI'"></div>
+        <div th:text="${bailunInfo.get(i-1).getDeviceName()}" style="margin: 0 50px;font-size: 20px;font-family: 'Microsoft YaHei UI'"></div>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var bailunInfo=[[${bailunInfo}]];
+</script>
+<script th:src="@{/js/index.js}"></script>
+<script th:src="@{/js/monitor/netStatus.js}"></script>
+</body>
+</html>

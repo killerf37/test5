@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ginfon.sfclient.mapper.RuntimeInfoMapper">
+    <resultMap id="RuntimeInfo" type="com.ginfon.sfclient.entity.RuntimeInfo">
+        <result column="DeviceType" property="deviceType"></result>
+        <result column="dataType" property="dataType"></result>
+        <result column="dataUploadFrequency" property="dataUploadFrequency"></result>
+    </resultMap>
+    
+    <select id="selectRuntimeInfoList" resultMap="RuntimeInfo">
+        SELECT * FROM m_runtimedata
+    </select>
+</mapper>

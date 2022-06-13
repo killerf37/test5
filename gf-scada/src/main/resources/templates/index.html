@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:include="fragment :: header"></head>
+<link th:href="@{/ruoyi/css/ry-ui.min.css?v=2.3.0}" rel="stylesheet"/>
+<link th:href="@{/css/font-awesome.css}" rel="stylesheet"/>
+<script th:src="@{/ruoyi/js/ry-ui.js}"></script>
+<script th:src="@{/js/sockjs.min.js}"></script>
+<script th:src="@{/js/stomp.min.js}"></script>
+<script type="text/javascript" th:src='@{/js/jquery.min.js}'></script>
+<script type="text/javascript" th:src='@{/js/echarts.min.js}'></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<style type="text/css">
+    /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 4px;
+        background-color: #F5F5F5;
+    }
+
+    /*定义滚动条轨道 内阴影+圆角*/
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgb(144, 144, 144);
+        border-radius: 5px;
+        background-color: #F5F5F5;
+    }
+
+    /*定义滑块 内阴影+圆角*/
+    ::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 0 6px rgb(47, 128, 185);
+        background-color: #ffffff;
+    }
+
+    .icon_click {
+
+    }
+</style>
+<body style="overflow:hidden">
+<div th:include="fragment :: navbar" class="navbar navbar-default" id="navbar"></div>
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
+
+        <div class="sidebar" id="sidebar">
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('sidebar', 'fixed')
+                } catch (e) {
+                }
+            </script>
+            <ul class="nav nav-list">
+               <!-- <li class="active">
+                    <a href="/scada/layout" class="menuItem">
+                        <i class="fa fa-dashboard"></i>
+                        <span class="menu-text"> [[#{system.dashboard}]] </span>
+                    </a>
+                </li>-->
+                <li th:each="menu : ${menus}" th:class="${menu.orderNum == '0'} ? 'active'" >
+                    <a href="#" class="dropdown-toggle" th:id="${'fm-' + menu.menuId}">
+                        <i class="fa fa fa-bar-chart-o" th:class="${menu.icon}"></i>
+                        <span class="menu-text"
+                              th:text="${@messageUtils.message(menu.i18nKey)}">[[${menu.menuName}]]</span>
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+                    <ul class="submenu">
+                        <li th:each="cmenu : ${menu.children}" th:class="${menu.orderNum == '0' && cmenu.orderNum == '1'} ? 'active'">
+                            <a th:if="${#lists.isEmpty(cmenu.children)}"
+                               th:href="@{${cmenu.url}}" class="menuItem" th:data-index="${'fm-' + menu.menuId}"
+                               th:text="${@messageUtils.message(cmenu.i18nKey)}">[[${cmenu.menuName}]]<i></i><span
+                                    class="menu-text"></span></a>
+                            <a th:if="${not #lists.isEmpty(cmenu.children)}" href="#" class="dropdown-toggle"><span
+                                    class="menu-text" th:text="${@messageUtils.message(cmenu.i18nKey)}">[[${cmenu.menuName}]]</span><b
+                                    class="arrow icon-angle-down"></b></a>
+                            <ul th:if="${not #lists.isEmpty(cmenu.children)}" class="submenu">
+                                <li th:each="emenu : ${cmenu.children}">
+                                    <a th:utext="${@messageUtils.message(emenu.i18nKey)}" th:href="@{${emenu.url}}"
+                                       class="menuItem"
+                                       th:data-index="${'fm-' + menu.menuId}">[[${emenu.menuName}]]<i></i><span
+                                            class="menu-text"></span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul><!-- /.nav-list -->
+            <div class="sidebar-collapse" id="sidebar-collapse">
+                <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
+                   data-icon2="icon-double-angle-right"></i>
+            </div>
+
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('sidebar', 'collapsed')
+                } catch (e) {
+                }
+            </script>
+        </div>
+        <div class="main-content">
+            <iframe id="mainFrame" name="mainFrame" allowfullscreen="" frameborder="no" border="0"
+                    marginwidth="0" marginheight="0" scrolling="yes"
+                    onload="javascript:this.height = document.documentElement.clientHeight - 50;" width="100%"
+                    height="100%" src="/scada/layout" seamless></iframe>
+        </div><!-- /.main-content -->
+
+        <div class="ace-settings-container" id="ace-settings-container" th:include="fragment :: #ace-settings"></div>
+        <!-- /#ace-settings-container -->
+    </div><!-- /.main-container-inner -->
+</div><!-- /.main-container -->
+<div th:include="fragment :: #basicscripts"></div>
+
+
+<script th:src="@{/js/index.js}"></script>
+</body>
+</html>

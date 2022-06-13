@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ginfon.core.web.mapper.ConfigI18nMapper">
+    <resultMap id="result" type="com.ginfon.core.web.entity.I18nElement">
+        <result property="localKey" column="local_key"/>
+        <result property="localZh" column="local_zh"/>
+        <result property="localEn" column="local_en"/>
+        <result property="localTh" column="local_th"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="result">
+        SELECT * FROM sys_i18n
+    </select>
+</mapper>

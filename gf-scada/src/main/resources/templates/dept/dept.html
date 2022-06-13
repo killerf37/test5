@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="fa fa-desktop"></i>
+            <a href="#">[[#{system.home}]]</a>
+        </li>
+        <li><a href="#">[[#{system.management}]]</a></li>
+        <li class="active">[[#{system.dept.management}]]</li>
+    </ul><!-- .breadcrumb -->
+</div>
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 select-info">
+            <form id="dept-form">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            [[#{dept.name}]]：<input type="text" name="deptName"/>
+                        </li>
+                        <li>
+                            [[#{dept.state}]]：<select name="status"
+                                                     th:with="type=${@dictService.getType('sys_normal_disable')}">
+                            <option value="">[[#{dept.state.all}]]</option>
+                            <option th:each="dict : ${type}" th:text="${@messageUtils.message(dict.i18nKey)}"
+                                    th:value="${dict.dictValue}"></option>
+                        </select>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.treeTable.search()"><i
+                                    class="fa fa-search"></i>&nbsp;[[#{search}]]</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                    class="fa fa-refresh"></i>&nbsp;[[#{reset}]]</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group hidden-xs" id="toolbar" role="group">
+            <a class="btn btn-outline btn-success btn-rounded" onclick="$.operate.add(100)"
+               shiro:hasPermission="system:dept:add">
+                <i class="fa fa-plus"></i> [[#{add}]]
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+        </div>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var addFlag = [[${@permission.hasPermi('system:dept:add')}]];
+    var editFlag = [[${@permission.hasPermi('system:dept:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('system:dept:remove')}]];
+    var datas = [[${@dictService.getType('sys_normal_disable')}]];
+    var prefix = ctx + "system/dept"
+
+    $(function () {
+        var options = {
+            id: "deptId",
+            parentId: "parentId",
+            url: prefix + "/list",
+            createUrl: prefix + "/add/{id}",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove/{id}",
+            modalName: $.i18n.prop("dept"),
+            columns: [{
+                field: 'deptName',
+                title: $.i18n.prop("dept.name"),
+            },
+                {
+                    field: 'orderNum',
+                    title: $.i18n.prop("dept.sort"),
+                    align: "center"
+                },
+                {
+                    field: 'status',
+                    title: $.i18n.prop("dept.state"),
+                    align: "center",
+                    formatter: function (value, item, index) {
+                        return $.table.selectDictLabel(datas, item.status);
+                    }
+                },
+                {
+                    field: 'createTime',
+                    title: $.i18n.prop("dept.createtime"),
+                    align: "center"
+                },
+                {
+                    title: $.i18n.prop("operate"),
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        if (row.parentId != 0) {
+                            var actions = [];
+                            actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.deptId + '\')"><i class="fa fa-edit">' + $.i18n.prop("edit") + '</i></a> ');
+                            actions.push('<a class="btn btn-info  btn-xs ' + addFlag + '" href="#" onclick="$.operate.add(\'' + row.deptId + '\')"><i class="fa fa-plus">' + $.i18n.prop("add") + '</i></a> ');
+                            actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="remove(\'' + row.deptId + '\')"><i class="fa fa-remove">' + $.i18n.prop("delete") + '</i></a>');
+                            return actions.join('');
+                        } else {
+                            return "";
+                        }
+                    }
+                }]
+        };
+        $.treeTable.init(options);
+    });
+
+    function remove(id) {
+        $.modal.confirm("确定删除该条" + $.table._option.modalName + "信息吗？", function () {
+            $.ajax({
+                type: 'post',
+                url: prefix + "/remove/" + id,
+                success: function (result) {
+                    if (result.code == web_status.SUCCESS) {
+                        $.modal.msgSuccess(result.msg);
+                        $.treeTable.refresh();
+                    } else {
+                        $.modal.msgError(result.msg);
+                    }
+                }
+            });
+        });
+    }
+</script>
+</body>
+</html>

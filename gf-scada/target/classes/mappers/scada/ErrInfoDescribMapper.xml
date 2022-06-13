@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ginfon.scada.event.mapper.ErrInfoDescribMapper">
+    <resultMap id="errinfo" type="com.ginfon.scada.entity.ErrDTO">
+        <result column="deviceType" property="deviceType"></result>
+        <result column="errorCode" property="errCode"></result>
+        <result column="errorLevel" property="errLevel"></result>
+        <result column="errorDescribe" property="errDescrib"></result>
+    </resultMap>
+
+    <select id="selectErrInfo" parameterType="Integer" resultMap="errinfo">
+        SELECT * FROM m_err WHERE deviceType=#{type}
+    </select>
+
+</mapper>

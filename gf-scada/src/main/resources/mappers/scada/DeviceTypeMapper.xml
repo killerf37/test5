@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ginfon.sfclient.mapper.DeviceTypeMapper">
+    <resultMap id="DeviceType" type="com.ginfon.sfclient.entity.DeviceType">
+        <result column="DeviceType" property="deviceType"></result>
+        <result column="DeviceDesc" property="deviceDesc"></result>
+        <result column="GinFonDeviceType" property="ginFonDeviceType"></result>
+        <result column="EleName" property="eleName"></result>
+    </resultMap>
+    
+    <select id="selectDeviceTypeList" resultMap="DeviceType">
+        SELECT * FROM m_devicetype
+    </select>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ginfon.sfclient.mapper.DeviceStatusMapper">
+    <resultMap id="DeviceStatus" type="com.ginfon.sfclient.entity.DeviceStatus">
+        <result column="DeviceType" property="deviceType"></result>
+        <result column="deviceStatusIndex" property="deviceStatusIndex"></result>
+        <result column="deviceStatus" property="deviceStatus"></result>
+        <result column="ginFonDeviceStatus" property="ginFonDeviceStatus"></result>
+    </resultMap>
+    
+    <select id="selectDeviceStatusList" resultMap="DeviceStatus">
+        SELECT * FROM m_devicestatusdesc
+    </select>
+</mapper>

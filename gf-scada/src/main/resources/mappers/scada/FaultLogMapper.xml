@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ginfon.scada.event.mapper.FaultLogMapper">
+    <resultMap id="FaultR" type="com.ginfon.scada.entity.DeviceFaultDTO">
+        <result column="lineNo" property="lineNo"></result>
+        <result column="id" property="ID"></result>
+        <result column="deviceType" property="deviceType"></result>
+        <result column="deviceNo" property="deviceNo"></result>
+        <result column="devicefaultIndex" property="faultIndex"></result>
+        <result column="devicefault" property="fault"></result>
+        <result column="faultTriggerTime" property="faultTriggerTime"></result>
+        <result column="faultReleaseTime" property="faultReleaseTime"></result>
+
+        <result column="lineName" property="lineName"></result>
+        <result column="typeDescrib" property="typeDescrib"></result>
+        <result column="devicePhysicalNo" property="devicePhysicalNo"></result>
+        <result column="faultDescrib" property="faultDescrib"></result>
+        <result column="clientId" property="clientId"></result>
+
+    </resultMap>
+
+    <select id="selctFault" parameterType="com.ginfon.scada.entity.ScadaStatusDTO" resultMap="FaultR">
+        SELECT * FROM t_faultlog
+        <where>
+            DeviceFaultIndex=1
+            <if test="lineNo!= null and lineNo != ''"> and lineNo=#{lineNo}</if>
+            <if test="deviceType!= null and deviceType != ''">and DeviceType=#{deviceType}</if>
+            <if test="deviceNo!= null and deviceNo != ''">and DeviceNo=#{deviceNo}</if>
+            <if test="fault!= null and fault != ''">and DeviceFault=#{fault}</if>
+
+        </where>
+        ORDER BY id DESC
+    </select>
+
+    <select id="selectMoreFault" parameterType="com.ginfon.scada.entity.ScadaLog" resultMap="FaultR">
+        SELECT * FROM t_faultlog
+        <where>
+            DeviceFaultIndex=1
+            <if test="lineNo!= null and lineNo != ''"> and lineNo=#{lineNo}</if>
+            <if test="deviceType!= null and deviceType != ''">and DeviceType=#{deviceType}</if>
+            <if test="deviceNo!= null and deviceNo != ''">and DeviceNo=#{deviceNo}</if>
+<!--            <if test="fault!= null and fault != ''">and DeviceFault=#{fault}</if>-->
+        </where>
+        ORDER BY id DESC
+    </select>
+
+    <select id="selectLineFault" parameterType="Integer" resultMap="FaultR">
+        SELECT * FROM t_faultlog
+        <where>
+            DeviceFaultIndex=1
+            <if test="_parameter!= null"> and lineNo=#{_parameter}</if>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="selctTopFault" resultMap="FaultR">
+        SELECT * FROM t_faultlog WHERE DeviceFaultIndex=1 ORDER BY id DESC
+    </select>
+
+
+    <insert id="insertFault" parameterType="com.ginfon.scada.entity.DeviceFaultDTO">
+        INSERT INTO  t_faultlog(DeviceType,DeviceFaultIndex,DeviceFault,DeviceNo,FaultTriggerTime,FaultReleaseTime,LineNo,LineName,TypeDescrib,DevicePhysicalNo,FaultDescrib,ClientID)
+        VALUES (#{deviceType},1,#{fault},#{deviceNo},#{faultTriggerTime},#{faultReleaseTime},#{lineNo},#{lineName},#{typeDescrib},#{devicePhysicalNo},#{faultDescrib},#{clientId})
+    </insert>
+
+    <delete id="delFault" parameterType="com.ginfon.scada.entity.ScadaStatusDTO">
+        delete from t_faultlog where id=#{id}
+    </delete>
+
+    <!--更新某行记录-->
+    <!--update user set username=${username} where id=${id}-->
+    <update id="updateFault" parameterType="java.math.BigInteger">
+        update t_faultlog set DeviceFaultIndex=2,FaultReleaseTime=NOW() where id=#{id}
+    </update>
+</mapper>

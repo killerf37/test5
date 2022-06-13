@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-dict-edit" th:object="${dict}">
+        <input name="dictCode" type="hidden" th:field="*{dictCode}"/>
+        <div class="form-group">
+            <label class="col-sm-3 control-label ">[[#{dict.label}]]：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="dictLabel" id="dictLabel" th:field="*{dictLabel}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">[[#{dict.label.i18n}]]：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="i18nKey" id="i18nKey" th:field="*{i18nKey}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label ">[[#{dict.value}]]：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="dictValue" id="dictValue" th:field="*{dictValue}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">[[#{dict.type}]]：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" readonly="true" th:field="*{dictType}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">[[#{dict.style}]]：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" id="cssClass" name="cssClass" th:field="*{cssClass}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">[[#{dict.sort}]]：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="dictSort" th:field="*{dictSort}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">[[#{dict.display.style}]]：</label>
+            <div class="col-sm-8">
+                <select name="listClass" class="form-control m-b">
+                    <option value="" th:field="*{listClass}">---[[#{select}]]---</option>
+                    <option value="default" th:field="*{listClass}">[[#{dict.display.default}]]</option>
+                    <option value="primary" th:field="*{listClass}">[[#{dict.display.primary}]]</option>
+                    <option value="success" th:field="*{listClass}">[[#{dict.display.success}]]</option>
+                    <option value="info" th:field="*{listClass}">[[#{dict.display.info}]]</option>
+                    <option value="warning" th:field="*{listClass}">[[#{dict.display.warning}]]</option>
+                    <option value="danger" th:field="*{listClass}">[[#{dict.display.danger}]]</option>
+                </select>
+                <span class="help-block m-b-none"><i
+                        class="fa fa-info-circle"></i> [[#{dict.display.style.tips}]]</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">[[#{dict.system.default}]]：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dictService.getType('sys_yes_no')}">
+                    <input type="radio" th:id="${dict.dictCode}" name="isDefault" th:value="${dict.dictValue}"
+                           th:field="*{isDefault}">
+                    <label th:for="${dict.dictCode}" th:text="${@messageUtils.message(dict.i18nKey)}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">[[#{dict.state}]]：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dictService.getType('sys_normal_disable')}">
+                    <input type="radio" th:id="${dict.dictCode}" name="status" th:value="${dict.dictValue}"
+                           th:field="*{status}">
+                    <label th:for="${dict.dictCode}" th:text="${@messageUtils.message(dict.i18nKey)}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">[[#{remark}]]：</label>
+            <div class="col-sm-8">
+                <textarea id="remark" name="remark" class="form-control">[[*{remark}]]</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-control-static col-sm-offset-9">
+                <button type="submit" class="btn btn-primary">[[#{submit}]]</button>
+                <button onclick="$.modal.close()" class="btn btn-danger" type="button">[[#{close}]]</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    var prefix = ctx + "system/dict/data"
+
+    $("#form-dict-edit").validate({
+        rules: {
+            dictLabel: {
+                required: true,
+            },
+            dictValue: {
+                required: true,
+            },
+            dictSort: {
+                required: true,
+                digits: true
+            },
+        },
+        submitHandler: function (form) {
+            $.operate.save(prefix + "/edit", $('#form-dict-edit').serialize());
+        }
+    });
+</script>
+</body>
+</html>

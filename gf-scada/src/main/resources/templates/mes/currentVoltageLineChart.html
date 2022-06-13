@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+</head>
+<link rel="stylesheet" href="/ace/css/ace.min.css"/>
+<script type="text/javascript" th:src='@{/js/jquery.min.js}'></script>
+<script type="text/javascript" th:src='@{/js/echarts.min.js}'></script>
+
+<body>
+    <div class="flex" style="width: 100%;height: 45%;align-items: center;justify-content: center" id="vLineChart"></div>
+    <hr/>
+    <div class="flex" style="width: 100%;height: 45%;" id="cLineChart"></div>
+    <div th:include="include :: footer"></div>
+    <script th:src="@{/js/monitor/lineChart.js}"></script>
+</body>
+</html>

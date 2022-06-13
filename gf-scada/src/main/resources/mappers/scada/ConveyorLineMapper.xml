@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ginfon.scada.event.mapper.ConveyorLineMapper">
+    <resultMap id="ConveyorLineR" type="com.ginfon.scada.entity.ConveyorLine">
+        <result column="lineNo" property="lineNo"></result>
+        <result column="plc" property="plc"></result>
+        <result column="type" property="type"></result>
+        <result column="productId" property="proudctId"></result>
+        <result column="deviceId" property="deviceId"></result>
+        <result column="deviceName" property="deviceName"></result>
+        <result column="beltLine" property="beltLine"></result>
+		<result column="blockingDetectionNum" property="blockingDetectionNum"></result>
+		<result column="length" property="length"></result>
+    </resultMap>
+    
+    <select id="selectConveyorLine" parameterType="com.ginfon.scada.entity.ConveyorLine" resultMap="ConveyorLineR">
+        SELECT * FROM d_conveyor_line_device
+    </select>
+
+    <select id="selectBaiLunLine" parameterType="com.ginfon.scada.entity.ConveyorLine" resultMap="ConveyorLineR">
+        SELECT * FROM d_bailun_line
+    </select>
+</mapper>

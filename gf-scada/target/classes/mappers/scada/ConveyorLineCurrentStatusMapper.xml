@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ginfon.scada.event.mapper.ConveyorLineCurrentStatusMapper">
+    <resultMap id="logResult" type="com.ginfon.scada.entity.CurrentStatus">
+        <result property="id" column="id"/>
+        <result property="parentlineNo" column="parentlineNo"/>
+        <result property="lineNo" column="lineNo"/>
+        <result property="stateId" column="stateId"/>
+        <result property="type" column="type"/>
+        <result property="startime" column="startime"/>
+        <result property="endtime" column="endtime"/>
+        <result property="classes" column="classes"/>
+    </resultMap>
+
+    <insert id="insertstatus" parameterType="com.ginfon.scada.entity.CurrentStatus" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO t_Status (parentlineNo,lineNo,stateId,type,startime) VALUES (#{parentlineNo},#{lineNo},#{stateId},1,#{startime})
+    </insert>
+
+    <update id="updatestatus" parameterType="com.ginfon.scada.entity.CurrentStatus">
+    UPDATE t_Status SET type =2 , endtime=#{endtime} WHERE id=#{id}
+
+    </update>
+
+    <update id="updateendtime" parameterType="com.ginfon.scada.entity.CurrentStatus">
+    UPDATE t_Status SET  endtime=#{endtime} WHERE id=#{id}
+
+    </update>
+
+    <select id="selectstatus" parameterType="com.ginfon.scada.entity.CurrentStatusEvent" resultMap="logResult">
+        SELECT * FROM t_status
+        WHERE
+        parentlineNo = #{parentlineno} AND LineNo = #{lineno} AND stateId &lt;=#{limt} AND type=1
+    </select>
+
+    <!--    <select id="selectstatus" parameterType="com.ginfon.scada.entity.ScadaEvent">-->
+    <!--        SELECT * FROM t_status-->
+    <!--        WHERE-->
+    <!--        (id IN (SELECT MAX(ID) AS N FROM t_scada_eventlog WHERE parentlineNo=#{parentLineNo} AND LineNo=#{lineNo}))-->
+    <!--    </select>-->
+
+</mapper>

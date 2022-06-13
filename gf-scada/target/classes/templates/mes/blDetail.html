@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include :: header"></head>
+<!--<link th:href="@{/css/scada.css}" rel="stylesheet"/>-->
+<link rel="stylesheet" href="/ace/css/ace.min.css"/>
+<link th:href="@{/ajax/libs/bootstrap-table/bootstrap-table.min.css}" rel="stylesheet"/>
+<link type="text/css" href="combo.select.css"/>
+<link href="/ajax/libs/select/select2.css">
+<script type="text/javascript" src="/js/jquery.combo.select.js"></script>
+<script src="/ajax/libs/select/select2.js"></script>
+<script src="/js/jquery-1.11.3.min.js"></script>
+<script th:src="@{/js/stomp.min.js}"></script>
+<script th:src="@{/js/sockjs.min.js}"></script>
+<script type="text/javascript" th:src='@{/js/jquery.min.js}'></script>
+<script type="text/javascript" th:src='@{/js/echarts.min.js}'></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<style type="text/css">
+    #showLeft {
+        display: none;
+    }
+
+    #statusId {
+        margin-top: 10px;
+        margin-left: 20px;
+        font-size: large;
+        /*font-family: Arial;*/
+        font-weight: bold;
+    }
+    .dowebok { position: relative; left: 50px;}
+</style>
+<body class="gray-bg" oncontextmenu="return false;">
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="fa fa-desktop"></i>
+            <a href="#">[[#{system.home}]]</a>
+        </li>
+        <li class="active">[[#{system.dashboard}]]</li>
+    </ul><!-- .breadcrumb -->
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-8">
+                <span style="margin-left:10px; font-size: 20px;">线体颜色示意说明：</li></span>
+                <span style="margin-left:10px; font-size: 20px;">急停：<li th:id="jt" class="fa fa-circle" style="color: #FA321E"></li></span>
+                <span style="margin-left:10px; font-size: 20px;">故障：<li th:id="gz" class="fa fa-circle" style="color: #faf628"></li></span>
+                <span style="margin-left:10px; font-size: 20px;">堵包：<li th:id="db" class="fa fa-circle" style="color: #5d3cfa"></li></span>
+                <span style="margin-left:10px; font-size: 20px;">本地：<li th:id="bd" class="fa fa-circle" style="color: #faa930"></li></span>
+                <span style="margin-left:10px; font-size: 20px;">休眠、停止、就绪：<li th:id="tz" class="fa fa-circle" style="color: #808080"></li></span>
+                <span style="margin-left:10px; font-size: 20px;">运行：<li th:id="yx" class="fa fa-circle" style="color: #1cc09f"></li></span>
+                <span style="margin-left:10px; font-size: 20px;">离线：<li th:id="lx" class="fa fa-circle" style="color: #2f4050"></li></span>
+        </div>
+        <div class="col-sm-4" id="monitorInfo">
+            <div class="dowebok">
+                    <input type="button" id="btnmu" class="btn-primary" value="启动" style="margin-left:10px;font-size: 20px;" onclick="request103('start')"/>
+                    <input type="button" id="btnstop" class="btn-primary" value="停止" style="margin-left:10px; font-size: 20px;" onclick="request103('stop')"/>
+<!--                    <input type="button" onclick="motai()" class="btn-primary" value="参数设置" style="margin-left:10px; font-size: 20px;"/>-->
+                </div>
+        </div>
+        <div class="col-sm-12" id="" style="margin-top: 10px;">
+            <div th:utext="${blSvg}"></div>
+        </div>
+        <div class="col-sm-12 category-list" style="margin-top: 10px;">
+            <div class="ibox-title">
+                [[#{event.reminder}]]
+                <div class="ibox-tools" id="controllBtn">
+                    <a id="hideTable" onclick="showTable()"><i class="fa fa-chevron-up"></i></a>
+                    <a id="title" onclick="getMore();"><i class="fa fa-ellipsis-h"></i></a>
+                </div>
+            </div>
+            <div style="background-color:#f1f1f1; display: none;" id="eventReminder">
+                <table class="table" border-width="0 0 1px 0" border-style="solid" border-color="black" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th>线体号</th>
+                        <th>设备类别</th>
+                        <th>设备编号</th>
+                        <th>异常信息</th>
+                        <th>活动状态</th>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                    </tr>
+                    </thead>
+                    <tbody id="eventReminderTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+</div><!-- /.page-content -->
+<div th:include="include :: footer"></div>
+<script>
+    // $(".modal").appendTo("body"), $("[data-toggle=popover]").popover(), $(".collapse-link").click(function () {
+    //     var div_ibox = $(this).closest("div.ibox"),
+    //         e = $(this).find("i"),
+    //         i = div_ibox.find("div.ibox-content");
+    //     i.slideToggle(200),
+    //         e.toggleClass("fa-chevron-up").toggleClass("fa-chevron-down"),
+    //         div_ibox.toggleClass("").toggleClass("border-bottom"),
+    //         setTimeout(function () {
+    //             div_ibox.resize();
+    //         }, 50);
+    // }), $(".close-link").click(function () {
+    //     var div_ibox = $(this).closest("div.ibox");
+    //     div_ibox.remove()
+    // });
+    function hideTable(){
+        /*var div_h = $(window).height() - 85;
+        if (div_h != 24) {
+            $(".thumbnail").attr("width", "100%");
+            $(".thumbnail").attr("height", div_h);
+            $(".thumbnail").attr("style", "height:" + div_h + "px;");
+            $(".thumbnail").css("padding-top", (0));
+            $("#eventReminder").attr("height", 0);
+            $("#eventReminder").attr("style", "height:0px;margin-top:10px;");
+            $(".map svg").css("height",(div_h - 45) / 3 + "px")
+        }*/
+        document.getElementById('eventReminder').style.display = "none";
+
+        let str = '<a id="showTable" onclick="showTable()"><i class="fa fa-chevron-up"></i></a>'
+            +' <a id="title" onclick="getMore();"><i class="fa fa-ellipsis-h"></i></a>'
+        $("#controllBtn").html(str);
+    };
+    function showTable(){
+       /* var div_h = $(window).height() - 85;
+        if (div_h != 24) {
+            $(".thumbnail").attr("width", "100%");
+            $(".thumbnail").attr("height", div_h - 235);
+            $(".thumbnail").attr("style", "height:" + (div_h - 235) + "px;");
+            $(".thumbnail").css("padding-top", (0));
+            $(".map svg").css("height",(div_h - 235) / 3 + "px")
+            // $("#tabledata").attr("height", 235);
+            // $("#tabledata").attr("style", "height:235px;margin-top:10px;");
+        }*/
+        document.getElementById('eventReminder').style.display = "block";
+
+        let str = '<a id="hideTable" onclick="hideTable()"><i class="fa fa-chevron-down"></i></a>'
+            +'<a id="title" onclick="getMore();"><i class="fa fa-ellipsis-h"></i></a>';
+        $("#controllBtn").html(str);
+    };
+
+</script>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var maplineNo = [[${lineNameNo}]];//CA:01 CB:02这种，线体名称和线号
+    var mapNo = [[${mapNo}]];//1:CA.SVG  2：CB.svg这种,表示文件序号
+    var mapcount = [[${count}]];//svg图的数量
+    var lineNoName = [[${lineNoName}]];//01:CA  02:CB这种
+    var eleNameMap = [[${elename}]];//元素名称map，key为type，value为elename
+    var errinfo=[[${errinfo}]];//异常信息
+    var errdescrib=[[${errdescrib}]];//异常信息描述//传递设备异常描述<type:<异常码Int:异常信息String>>
+    var typedescrib=[[${typedescrib}]];//种类描述//传递设备类型名称<type:类型名称String>
+    var eventQueryName = [[${@messageUtils.message("event.query")}]];
+    var lineNo=[[${lineNo}]];
+    var lineip=[[${lineip}]];
+    var bailunInfo=[[${bailunInfo}]];
+    var currentlineNo=[[${currentlineNo}]];
+</script>
+<script th:src="@{/js/monitor/blDetail.js}"></script>
+<!--<script th:src="@{/js/monitor/chart.js}"></script>-->
+</body>
+</html>

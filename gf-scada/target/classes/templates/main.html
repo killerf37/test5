@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include :: header"></head>
+<!--<link th:href="@{/css/scada.css}" rel="stylesheet"/>-->
+<link rel="stylesheet" href="/ace/css/ace.min.css"/>
+<link th:href="@{/ajax/libs/bootstrap-table/bootstrap-table.min.css}" rel="stylesheet"/>
+<link type="text/css" href="combo.select.css"/>
+<link href="/ajax/libs/select/select2.css">
+<script type="text/javascript" src="/js/jquery.combo.select.js"></script>
+<script src="/ajax/libs/select/select2.js"></script>
+<script src="/js/jquery-1.11.3.min.js"></script>
+<script th:src="@{/js/stomp.min.js}"></script>
+<script th:src="@{/js/sockjs.min.js}"></script>
+<script type="text/javascript" th:src='@{/js/jquery.min.js}'></script>
+<script type="text/javascript" th:src='@{/js/echarts.min.js}'></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<style type="text/css">
+    #showLeft {
+        display: none;
+    }
+
+    #statusId {
+        margin-top: 10px;
+        margin-left: 20px;
+        font-size: large;
+        /*font-family: Arial;*/
+        font-weight: bold;
+    }
+    .dowebok { position: relative; left: 50px;}
+</style>
+<body class="gray-bg" oncontextmenu="return false;">
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="fa fa-desktop"></i>
+            <a href="#">[[#{system.home}]]</a>
+        </li>
+        <li class="active">[[#{system.dashboard}]]</li>
+    </ul><!-- .breadcrumb -->
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-3" id="leftDiv">
+            <div class="row">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>[[#{event.reminder}]]</h5>
+                        <div class="ibox-tools">
+                            <a id="title" onclick="getMore();"><i class="fa fa-ellipsis-h"></i></a>
+                            &nbsp;&nbsp;
+                        </div>
+                    </div>
+
+                    <div style="background-color:#f1f1f1; height: 360px;" id="eventReminder">
+                        <table class="table" border-width="0 0 1px 0" border-style="solid" border-color="black"
+                               style="display: none;">
+                            <thead>
+                            <tr>
+                                <th>线号</th>
+                                <th>编号</th>
+                                <th>状态编号</th>
+                                <th>触发解除</th>
+                                <th>触发时间</th>
+                            </tr>
+                            </thead>
+                            <tbody id="eventReminderTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="ibox float-e-margins" style="margin-bottom:0px;">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9" id="monitorInfo">
+            <i id="openScreen" onclick="openScreen();" class="fa fa-arrows-alt"
+               style="float:right;font-size: large;"></i>
+            <i id="closeScreen" onclick="closeScreen();" class="fa fa-compress"
+               style="float:right;display: none;font-size: large;"></i>
+            <div style="height: 40px;display: flex;align-items: center;">
+                <i id="closeLeft" onclick="closeLeftDiv();" class="fa fa-chevron-left"></i>&nbsp;&nbsp;
+                <i id="showLeft" onclick="openLeftDiv();" class="fa fa-chevron-right"></i>&nbsp;&nbsp;
+                [[#{layer.level}]]：
+                <select id="layerLevel" style="width: 110px">
+                </select>&nbsp;&nbsp;
+                <!--<div id="statusId">
+                    <span style="margin-left:10px;">WCS</span>
+                    <span style="margin-left:10px;">通讯：<li th:id="conStatus1" class="fa fa-circle" style="color: #1cc09f"></li></span>
+                </div>-->
+                <div class="dowebok">
+                    <span style="...">线体号：</span>
+					<select id="sortPlanCode" name="sortPlanCode" style="width: 80px;height: 50px" onchange="functionOnChange()"></select>
+                    <input type="button" id="btnmu" class="btn-primary" value="启动" style="width: 80px;height: 50px" onclick="request103('start')">
+                    <input type="button" id="btnstop" class="btn-primary" value="停止" style="width: 80px;height: 50px" onclick="request103('stop')">
+<!--                    <input type="button" id="settingInfo" class="btn-primary" value="设置" style="width: 80px" onclick="allInOne()">-->
+                    <button onclick="motai()" class="btn-primary" style="width: 120px;height: 50px">线体参数设置</button>
+<!--                    <input type="button" id="btnready" value="查询" width="50px" onclick="functionOnChange()">-->
+                </div>
+<!--                <div class="dowebok" style="margin-left: 50px;">-->
+<!--                    <span style="...">摆轮控制：</span>-->
+<!--                    <select id="wheelControl" style="width: 60px;">-->
+<!--                        <option value="1">启动</option>-->
+<!--                        <option value="2">停止</option>-->
+<!--                        <option value="3">左偏</option>-->
+<!--                        <option value="4">回中</option>-->
+<!--                        <option value="5">右偏</option>-->
+<!--                    </select>-->
+<!--                    <input type="button" value="执行" width="50px" onclick="wheelExecute()">-->
+<!--                </div>-->
+<!--                <div class="dowebok" style="margin-left: 50px;">-->
+<!--                    <span style="...">CD线体控制：</span>-->
+<!--                    <select id="lineControl" style="width: 60px;">-->
+<!--                        <option value="1">正转</option>-->
+<!--                        <option value="2">反转</option>-->
+<!--                    </select>-->
+<!--                    <input type="button" value="执行" width="50px" onclick="lineExecute()">-->
+<!--                </div>-->
+
+            </div>
+            <div>
+
+<!--                <select id="functionoption" onchange="functionOnChange()">-->
+<!--                    <option value="1">堵包</option>-->
+<!--                    <option value="2">休眠</option>-->
+<!--&lt;!&ndash;                    <option value="3">启动</option>&ndash;&gt;-->
+<!--                </select>-->
+<!--                <input type="text" id="cloggedtime" placeholder="时间/秒">-->
+<!--				<input type="button" id="setting" value="设置时间" width="50px" onclick="allInOne()">-->
+<!--                <input type="button" id="stdubao" value="启用" width="50px" onclick="controlCommand(0)">-->
+<!--                <input type="button" id="dubao" value="屏蔽" width="50px" onclick="controlCommand(1)">-->
+<!--                <input type="text" id="cloggedtimedisplay" placeholder="当前时间" readonly="readonly">-->
+<!--                <span style="margin-left:10px;">功能：<li th:id="dubaoStatus" class="fa fa-circle" style="color: #C1BFBD;"></li></span>-->
+            </div>
+            <div>
+                <li th:id="lab">线体颜色示意说明:</li>
+                <span style="margin-left:10px;">急停：<li th:id="jt" class="fa fa-circle" style="color: #FA321E"></li></span>
+                <span style="margin-left:10px;">故障：<li th:id="gz" class="fa fa-circle" style="color: #faf628"></li></span>
+                <span style="margin-left:10px;">堵包：<li th:id="db" class="fa fa-circle" style="color: #5d3cfa"></li></span>
+                <span style="margin-left:10px;">本地：<li th:id="bd" class="fa fa-circle" style="color: #faa930"></li></span>
+                <span style="margin-left:10px;">休眠,停止,就绪：<li th:id="tz" class="fa fa-circle" style="color: #808080"></li></span>
+                <span style="margin-left:10px;">运行：<li th:id="yx" class="fa fa-circle" style="color: #1cc09f"></li></span>
+                <span style="margin-left:10px;">离线：<li th:id="lx" class="fa fa-circle" style="color: #2f4050"></li></span>
+            </div>
+            <div th:each="scada,status:${scadas}" th:utext="${scada}" th:style="(${status.index == 0}?'display:block;margin: auto;'
+            :'display:none;margin: auto;')" th:id="'Layer' + ${status.count}">
+            </div>
+        </div>
+    </div>
+</div><!-- /.page-content -->
+<div th:include="include :: footer"></div>
+<script>
+    $(".modal").appendTo("body"), $("[data-toggle=popover]").popover(), $(".collapse-link").click(function () {
+        var div_ibox = $(this).closest("div.ibox"),
+            e = $(this).find("i"),
+            i = div_ibox.find("div.ibox-content");
+        i.slideToggle(200),
+            e.toggleClass("fa-chevron-up").toggleClass("fa-chevron-down"),
+            div_ibox.toggleClass("").toggleClass("border-bottom"),
+            setTimeout(function () {
+                div_ibox.resize();
+            }, 50);
+    }), $(".close-link").click(function () {
+        var div_ibox = $(this).closest("div.ibox");
+        div_ibox.remove()
+    });
+
+</script>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var plc = [[${plc}]];
+    var layerFlag = [[${layerFlag}]];
+    var chuteCount = [[${chuteCount}]];
+    var estopCount = [[${estopCount}]];
+    var motorCount = [[${motorCount}]];
+    var cartCount = [[${cartCount}]];
+    var inductionunitInfo = [[${inductionunitInfo}]];
+    var chutegroupCount = [[${chutegroupCount}]];
+    var chuteGroup = [[${chuteGroup}]];
+    var grayscale = [[${grayscale}]];
+    var roles = [[${roles}]];
+    var allLine=[[${allLine}]];
+    var lineNo=[[${lineNo}]];
+    var optionval=[[${option}]];
+</script>
+<script th:src="@{/js/monitor/scada.js}"></script>
+<script th:src="@{/js/monitor/chart.js}"></script>
+</body>
+</html>

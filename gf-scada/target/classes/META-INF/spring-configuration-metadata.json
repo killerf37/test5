@@ -1,0 +1,42 @@
+{
+  "groups": [
+    {
+      "name": "goldpeak",
+      "type": "com.ginfon.core.web.config.CommonConfig",
+      "sourceType": "com.ginfon.core.web.config.CommonConfig"
+    },
+    {
+      "name": "spring.datasource.ginfon-sys",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.ginfon.core.web.config.SystemConfiguration",
+      "sourceMethod": "matrixDataSource()"
+    },
+    {
+      "name": "spring.datasource.scada-event",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.ginfon.scada.config.ScadaEventConfiguration",
+      "sourceMethod": "scadaDataSource()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "goldpeak.copyright-year",
+      "type": "java.lang.String",
+      "description": "版权年份",
+      "sourceType": "com.ginfon.core.web.config.CommonConfig"
+    },
+    {
+      "name": "goldpeak.name",
+      "type": "java.lang.String",
+      "description": "项目名称",
+      "sourceType": "com.ginfon.core.web.config.CommonConfig"
+    },
+    {
+      "name": "goldpeak.version",
+      "type": "java.lang.String",
+      "description": "版本",
+      "sourceType": "com.ginfon.core.web.config.CommonConfig"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ginfon.core.web.mapper.SysLogInfoMapper">
+
+    <resultMap type="SysLog" id="sysLog">
+        <result property="logType"     column="logType"      />
+        <result property="logTime"     column="logTime"      />
+        <result property="userId"     column="userId"      />
+        <result property="clientIp"     column="clientIp"      />
+        <result property="logInfo"     column="logInfo"      />
+        <result property="name" column="NAME"/>
+    </resultMap>
+
+    <insert id="insertSysLog" parameterType="SysLog">
+        insert into sys_sysLog (logType,logTime,userId,clientIp,logInfo) values
+        (#{logType},#{logTime},#{userId},#{clientIp},#{logInfo})
+    </insert>
+    
+    <select id="sysLogQuery" parameterType="SysLog" resultMap="sysLog">
+        select a.USERID,b.user_name as NAME,case a.LogType when '1' then '登录系统操作'
+        when '2' then '退出系统操作' when '3' then '开班操作' when '4' then '班次结束操作'
+        end as LOGINFO,a.CLIENTIP,DATE_FORMAT(a.LOGTIME, '%Y-%m-%d %H:%i:%s') as LOGTIME from sys_sysLog a,sys_user b
+        <where>
+            a.USERID = b.login_name
+            <if test="params.startTime!=null and params.startTime != ''">
+                and DATE_FORMAT(a.LOGTIME, '%Y-%m-%d %H:%i:%s')&gt;= #{params.startTime}
+            </if>
+            <if test="params.endTime!=null and params.endTime != ''">
+                and DATE_FORMAT(a.LOGTIME, '%Y-%m-%d %H:%i:%s')&lt;= #{params.endTime}
+            </if>
+            <if test="logType!=null and logType != ''">
+                and logType=#{logType}
+            </if>
+        </where>
+        order by LOGTIME desc
+    </select>
+</mapper>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<ul class="breadcrumb">
+			<li><i class="fa fa-desktop"></i> <a href="#">[[#{system.home}]]</a>
+			</li>
+			<li><a href="#">[[#{system.equipment.management}]]</a></li>
+			<li class="active">[[#{event.query}]]</li>
+		</ul>
+		<!-- .breadcrumb -->
+	</div>
+	<div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 select-info">
+				<form id="data-form">
+					<div class="select-list">
+						<ul>
+							<li>[[#{device.num}]]：<input type="text" name="parentlineNo"
+								class="input-mini" />
+							</li>
+							<li class="select-time"><label>[[#{starttime}]]： </label> <input
+								type="text" class="time-input" id="startTime"
+								th:value="${startTime}" name="startime" /></li>
+							<li class="select-time"><label>[[#{endtime}]]： </label> <input
+								type="text" class="time-input" id="endTime"
+								th:value="${endTime}" name="endtime" /></li>
+							<li><a class="btn btn-primary btn-rounded btn-sm"
+								onclick="$.table.search();"><i class="fa fa-search"></i>&nbsp;[[#{search}]]</a>
+							</li>
+							<li><a class="btn btn-primary btn-rounded btn-sm"
+								onclick="$.table.exportExcel();"><i class="fa fa-download"></i>&nbsp;[[#{export}]]</a>
+							</li>
+						</ul>
+
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script th:inline="javascript">
+    var prefix = ctx + "device/event/query";
+	
+    $(function () {
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#startTime',
+                type: 'datetime',
+                lang:  ($.cookie("lang") == "zh_CN") ? "cn":"en"
+            });
+
+            laydate.render({
+                elem: '#endTime',
+                type: 'datetime',
+                lang:  ($.cookie("lang") == "zh_CN") ? "cn":"en"
+            });
+        });
+        var options = {
+            url: prefix + "/info",
+            exportUrl: prefix + "/export",
+            modalName: $.i18n.prop("event.query"),
+            search: false,
+            showExport: false,
+            showRefresh: false, // 是否显示刷新按钮
+            showColumns: false, // 是否显示隐藏某列下拉框
+            showToggle: false,
+            columns: [{
+                field: 'parentlineName',
+                title: $.i18n.prop("parent.device"),
+                align: 'center',
+            },
+            {
+                field: 'lineName',
+                title: $.i18n.prop("device.num"),
+                align: 'center'
+            },
+            {
+				field: 'type',
+				title: $.i18n.prop("occur.type"),
+				align: 'center'
+			},
+			{
+				field: 'stateId',
+				title: $.i18n.prop("status.type"),
+				align: 'center',
+			},
+			{
+				field: 'startime',
+				title: $.i18n.prop("occur.time"),
+				align: 'center',
+			},
+			{
+				field: 'endtime',
+				title: $.i18n.prop("occur.time"),
+				align: 'center',
+			}]
+        };
+        $.table.init(options);
+    });
+</script>
+	 <script th:src="@{/js/monitor/chart.js}"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .row1{
+            margin: 10px 10px 10px 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="row1">
+    <span>设置时间:</span><input type="text" class="text-primary" id="sleeptime" style="width: 100px;height: 50px" placeholder="时间/秒">
+    <input type="button" id="setting1" value="写入" style="width: 100px;height: 50px" onclick="allInOne()">
+    <input type="button" id="sleepEnable" value="启用" style="width: 100px;height: 50px" onclick="controlCommand(0)">
+    <input type="button" id="sleepDisable" value="屏蔽" style="width: 100px;height: 50px" onclick="controlCommand(1)">
+    <span>当前时间显示:</span><input type="text" id="cloggedtimedisplay1" class="label" style="height: 50px;width: 100px" placeholder="" readonly="readonly">
+
+</div>
+<div class="row1">
+    <span>设置时间:</span><input type="text" id="cloggedtime" style="width: 100px;height: 50px" placeholder="时间/秒">
+    <input type="button" id="setting" value="写入" style="width: 100px;height: 50px" onclick="allInOne()">
+    <input type="button" id="stdubao" value="启用" style="width: 100px;height: 50px" onclick="controlCommand(0)">
+    <input type="button" id="dubao" value="屏蔽" style="width: 100px;height: 50px" onclick="controlCommand(1)">
+    <span>当前时间显示:</span><input type="text" id="cloggedtimedisplay" style="height: 50px;width: 100px" placeholder="" readonly="readonly">
+<!--    <span style="margin-left:10px;">功能：<li th:id="dubaoStatus" class="fa fa-circle" style="color: #C1BFBD;"></li></span>-->
+</div>
+</body>
+</html>

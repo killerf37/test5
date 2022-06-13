@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ginfon.scada.event.mapper.ScadaLogMapper">
+    <resultMap id="logResult" type="com.ginfon.scada.entity.ScadaEvent">
+        <result property="lineNo" column="LineNo"/>
+        <result property="triggerType" column="triggerType"/>
+        <result property="stateId" column="StateId"/>
+        <result property="parentLineNo" column="parentLineNo"/>
+        <result property="triggerTime" column="trigger_time"/>
+    </resultMap>
+
+    <select id="getScadaLogFifth" parameterType="com.ginfon.scada.entity.ScadaEvent" resultMap="logResult">
+        SELECT ParentLineNo,LineNo,StateId,TriggerType,DATE_FORMAT(EventTime,'%Y-%m-%d %H:%i:%s') as trigger_time
+        FROM t_scada_eventlog
+        ORDER BY trigger_time DESC limit 10
+    </select>
+
+    <select id="getScadaLogInfo" parameterType="com.ginfon.scada.entity.ScadaEvent" resultMap="logResult">
+        SELECT ParentLineNo,LineNo,StateId,TriggerType,DATE_FORMAT(EventTime,'%Y-%m-%d %H:%i:%s') as trigger_time
+        FROM t_scada_eventlog
+        <where>
+            <if test="deviceNo !=null and deviceNo !=''">and LineNo = #{deviceNo}</if>
+            <if test="startTime != null and startTime !=''">and DATE_FORMAT(EventTime,'%Y-%m-%d %H:%i:%s')  &gt;= #{startTime}</if>
+            <if test="endTime != null and endTime !=''">and DATE_FORMAT(EventTime,'%Y-%m-%d %H:%i:%s')  &lt;= #{endTime}</if>
+        </where>
+        ORDER BY trigger_time DESC
+    </select>
+
+
+</mapper>

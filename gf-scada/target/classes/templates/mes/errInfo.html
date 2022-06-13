@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 select-info">
+            <form id="data-form">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            [[#{device.num}]]：<input type="text" name="deviceNo" class="input-mini"/>
+                        </li>
+                        <li class="select-time">
+                            <label>[[#{starttime}]]： </label>
+                            <input type="text" class="time-input" id="startTime" th:value="${startTime}"
+                                   name="startTime"/>
+                        </li>
+                        <li class="select-time">
+                            <label>[[#{endtime}]]： </label>
+                            <input type="text" class="time-input" id="endTime" th:value="${endTime}"
+                                   name="endTime"/>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm"
+                               onclick="$.table.search();"><i
+                                    class="fa fa-search"></i>&nbsp;[[#{search}]]</a>
+                            <a class="btn btn-primary btn-rounded btn-sm"
+                               onclick="$.table.exportExcel()"><i
+                                    class="fa fa-download"></i>&nbsp;[[#{export}]]</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+        </div>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var lineNoName = [[${lineNoName}]];//01:CA  02:CB这种
+    var errdescrib=[[${errdescrib}]];//异常信息描述//传递设备异常描述<type:<异常码Int:异常信息String>>
+    var typedescrib=[[${typedescrib}]];//种类描述//传递设备类型名称<type:类型名称String>
+    var prefix = ctx + "device/event/errQuery"
+    $(function () {
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#startTime',
+                type: 'datetime',
+                lang: ($.cookie("lang") == "zh_CN") ? "cn" : "en"
+            });
+
+            laydate.render({
+                elem: '#endTime',
+                type: 'datetime',
+                lang: ($.cookie("lang") == "zh_CN") ? "cn" : "en"
+            });
+        });
+        var options = {
+            url: prefix + "/info",
+            exportUrl: prefix + "/export",
+            modalName: $.i18n.prop("event.query"),
+            search: false,
+            showExport: false,
+            showRefresh: false, // 是否显示刷新按钮
+            showColumns: false, // 是否显示隐藏某列下拉框
+            showToggle: false,
+            sortName: "id",
+            sortOrder: "desc",
+            columns: [{
+                field: 'lineNo',
+                title: "线号",
+                align: 'center',
+                formatter:function (value,row,index) {
+                    return convertFault(row,1);
+                }
+            },
+                {
+                    field: 'deviceType',
+                    title: "设备类型",
+                    align: 'center',
+                    formatter:function (value,row,index) {
+                        return convertFault(row,2);
+                    }
+                },
+                {
+                    field: 'deviceNo',
+                    title: "设备号",
+                    align: 'center',
+                    formatter:function (value,row,index) {
+                        return convertFault(row,4);
+                    }
+                },
+                {
+                    field: 'faultIndex',
+                    title: "活动状态",
+                    align: 'center',
+                    formatter:function (value,row,index) {
+                        if (value==1)
+                        {
+                            return "活动";
+                        }else
+                        {
+                            return "恢复";
+                        }
+                    }
+                },
+                {
+                    field: 'fault',
+                    title: "异常信息",
+                    align: 'center',
+                    formatter:function (value,row,index) {
+                        return convertFault(row,3);
+                    }
+                },
+                {
+                    field: 'faultTriggerTime',
+                    title: "开始时间",
+                    align: 'center'
+                    // formatter: function (value, row, index) {
+                    //     return duration(row.triggerTime, row.repairTime);
+                    // }
+                },
+                {
+                    field: 'faultReleaseTime',
+                    title: "恢复时间",
+                    align: 'center',
+                    formatter:function (value,row,index) {
+                        if (value==null)
+                        {
+                            return "-";
+                        }else
+                        {
+                            return value;
+                        }
+                    }
+                }
+            ]
+        };
+        $.table.init(options);
+    });
+
+    function duration(start, end) {
+        if (start != null && end != null) {
+            var stime = Date.parse(new Date(start));
+            var etime = Date.parse(new Date(end));
+            // 两个时间戳相差的毫秒数
+            var usedTime = etime - stime;
+            // 计算相差的天数
+            var days = Math.floor(usedTime / (24 * 3600 * 1000));
+            // 计算天数后剩余的毫秒数
+            var leave1 = usedTime % (24 * 3600 * 1000);
+            // 计算出小时数
+            var hours = Math.floor(leave1 / (3600 * 1000));
+            // 计算小时数后剩余的毫秒数
+            var leave2 = leave1 % (3600 * 1000);
+            // 计算相差分钟数
+            var minutes = Math.floor(leave2 / (60 * 1000));
+            // 计算分钟后剩余的毫秒数
+            var leave3 = leave2 - minutes * 1000 * 60;
+            // 计算相差秒数
+            var seconds = Math.floor(leave3 / 1000);
+
+            var time = (days * 24 + hours) + $.i18n.prop('hours') + minutes + $.i18n.prop('minutes') + seconds + $.i18n.prop('seconds');
+            return time;
+        } else {
+            return "";
+        }
+    }
+
+</script>
+<script th:src="@{/js/monitor/errinfo.js}"></script>
+</body>
+</html>

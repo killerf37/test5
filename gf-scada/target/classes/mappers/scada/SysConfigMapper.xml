@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ginfon.scada.event.mapper.SysConfigMapper">
+    <resultMap id="SysConfigResult" type="com.ginfon.scada.entity.SysConfig">
+        <result column="paramId" property="paramId"/>
+        <result column="paramValue" property="paramValue"/>
+        <result column="paramNote" property="paramNote"/>
+        <result column="createUser" property="createUser"/>
+        <result column="createTime" property="createTime"/>
+        <result column="updateUser" property="updateUser"/>
+        <result column="updateTime" property="updateTime"/>
+    </resultMap>
+
+    <select id="selectValueByParamId" parameterType="string" resultType="com.ginfon.scada.entity.SysConfig">
+        select paramId,paramValue,paramNote,createUser,updateUser,createTime,updateTime from m_sysconfig where paramId=#{paramId}
+    </select>
+</mapper>

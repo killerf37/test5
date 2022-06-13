@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" name="GB" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1190.6 841.9" enable-background="new 0 0 1190.6 841.9" xml:space="preserve">
+<line id="ZX00" fill="none" stroke="#B3B3B3" stroke-width="25" stroke-miterlimit="10" x1="72.7" y1="41" x2="49.3" y2="41"/>
+<line id="FJMODE" fill="none" stroke="#B3B3B3" stroke-width="25" stroke-miterlimit="10" x1="323.3" y1="41" x2="299.9" y2="41"/>
+<line id="BLOCKABLE" fill="none" stroke="#B3B3B3" stroke-width="25" stroke-miterlimit="10" x1="234" y1="41" x2="210.7" y2="41"/>
+<line id="SLEEPABLE" fill="none" stroke="#B3B3B3" stroke-width="25" stroke-miterlimit="10" x1="155.4" y1="41" x2="132" y2="41"/>
+<text transform="matrix(1 0 0 1 107.9166 74.7786)" font-family="'MicrosoftYaHei'" font-size="17.9841">休眠功能</text>
+<text transform="matrix(1 0 0 1 24.983 74.7786)" font-family="'MicrosoftYaHei'" font-size="17.9841">整线状态</text>
+<text transform="matrix(1 0 0 1 188.6471 74.7786)" font-family="'MicrosoftYaHei'" font-size="17.9841">堵塞功能</text>
+<text transform="matrix(1 0 0 1 273.6085 74.7786)" font-family="'MicrosoftYaHei'" font-size="17.9841">分拣模式</text>
+<line id="BIAODING" fill="none" stroke="#B3B3B3" stroke-width="25" stroke-miterlimit="10" x1="408.2" y1="42" x2="384.8" y2="42"/>
+<text transform="matrix(1 0 0 1 359.1437 74.7786)" font-family="'MicrosoftYaHei'" font-size="17.9841">标定模式</text>
+<line id="GB01" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="25" y1="109.1" x2="25" y2="197.3"/>
+<text transform="matrix(1.0226 0 0 1 7.0073 159.1738)" font-family="'MicrosoftYaHei'" font-size="15.1979">01-1</text>
+<line id="GB02" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="25" y1="198.3" x2="25" y2="282.9"/>
+<path id="GB03" fill="none" stroke="#ABABAB" stroke-width="20" stroke-miterlimit="10" d="M54.9,311c-16.4,0.1-29.9-12.5-30-28"/>
+<text transform="matrix(1 0 0 1 15.6512 249.1072)" font-family="'MicrosoftYaHei'" font-size="17.9753">01</text>
+<text transform="matrix(1 0 0 1 24.8684 310.9847)" font-family="'MicrosoftYaHei'" font-size="17.9753">02</text>
+<line id="GB04" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="218.1" y1="311" x2="55.3" y2="311"/>
+<text transform="matrix(1 0 0 1 126.3742 318.7641)" font-family="'MicrosoftYaHei'" font-size="17.9753">03</text>
+<line id="GB05" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="379.2" y1="311" x2="218.7" y2="311"/>
+<text transform="matrix(1 0 0 1 290.8076 318.5359)" font-family="'MicrosoftYaHei'" font-size="17.9753">04</text>
+<line id="GB06" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="533.4" y1="311" x2="380.2" y2="311"/>
+<text transform="matrix(1 0 0 1 446.5238 318.5361)" font-family="'MicrosoftYaHei'" font-size="17.9753">05</text>
+<line id="GB07" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="692.1" y1="311" x2="534.4" y2="311"/>
+<text transform="matrix(1 0 0 1 600.275 318.5358)" font-family="'MicrosoftYaHei'" font-size="17.9753">06</text>
+<line id="DJFL01" fill="none" stroke="#B3B3B3" stroke-width="40" stroke-miterlimit="10" x1="937.8" y1="308.6" x2="693.1" y2="308.6"/>
+<text transform="matrix(1.0943 0 0 1 742.7651 315.6799)" font-family="'MicrosoftYaHei'" font-size="31.5224">单件分离</text>
+<line id="GB08" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="988.5" y1="308.6" x2="940.7" y2="308.6"/>
+<line id="GB09" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="1037.5" y1="308.6" x2="989.7" y2="308.6"/>
+<line id="GB11" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="1135.5" y1="308.6" x2="1087.7" y2="308.6"/>
+<text transform="matrix(1 0 0 1 954.9048 315.4521)" font-family="'MicrosoftYaHei'" font-size="17.9753">11</text>
+<text transform="matrix(1 0 0 1 1003.762 315.452)" font-family="'MicrosoftYaHei'" font-size="17.9753">12</text>
+<text transform="matrix(1 0 0 1 1100.6597 315.4516)" font-family="'MicrosoftYaHei'" font-size="17.9753">14</text>
+<path id="GB12" fill="none" stroke="#ABABAB" stroke-width="20" stroke-miterlimit="10" d="M1136.5,308.6
+	c16.4,0.3,29.7,13.1,29.4,28.6"/>
+<text transform="matrix(1 0 0 1 1144.2761 322.8904)" font-family="'MicrosoftYaHei'" font-size="17.9753">15</text>
+<line id="GB13" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="1166.4" y1="431" x2="1165.7" y2="337.9"/>
+<text transform="matrix(1 0 0 1 1154.8125 394.2355)" font-family="'MicrosoftYaHei'" font-size="17.9753">16</text>
+<path id="GB14" fill="none" stroke="#ABABAB" stroke-width="20" stroke-miterlimit="10" d="M1165.7,431.4
+	c0.1,16.4-12.4,30-27.9,30.1"/>
+<text transform="matrix(1 0 0 1 1147.3425 460.0334)" font-family="'MicrosoftYaHei'" font-size="17.9753">17</text>
+<line id="GB15" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="1136.7" y1="461.5" x2="1089" y2="461.5"/>
+<text transform="matrix(1 0 0 1 1100.6594 468.5895)" font-family="'MicrosoftYaHei'" font-size="17.9753">18</text>
+<line id="BL01" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="1060.6" y1="461.5" x2="1087.8" y2="461.5"/>
+<line id="BL02" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="901.8" y1="461.5" x2="929" y2="461.5"/>
+<line id="GB16" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="1060.1" y1="461.5" x2="929.9" y2="461.5"/>
+<line id="GB17" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="901.3" y1="461.5" x2="853.5" y2="461.5"/>
+<text transform="matrix(1 0 0 1 983.3436 468.8088)" font-family="'MicrosoftYaHei'" font-size="17.9753">19</text>
+<text transform="matrix(1 0 0 1 865.1602 468.5893)" font-family="'MicrosoftYaHei'" font-size="17.9753">20</text>
+<line id="BL03" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="825.3" y1="461.5" x2="852.5" y2="461.5"/>
+<line id="GB18" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="824.4" y1="461.5" x2="694.1" y2="461.5"/>
+<text transform="matrix(1 0 0 1 750.666 469.0367)" font-family="'MicrosoftYaHei'" font-size="17.9753">21</text>
+<line id="BL04" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="665.9" y1="461.5" x2="693.1" y2="461.5"/>
+<line id="GB19" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="664.9" y1="461" x2="617.2" y2="461"/>
+<text transform="matrix(1 0 0 1 632.0267 468.5894)" font-family="'MicrosoftYaHei'" font-size="17.9753">22</text>
+<line id="BL05" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="588.9" y1="461" x2="616.1" y2="461"/>
+<line id="GB20" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="587.7" y1="461.5" x2="457.5" y2="461.5"/>
+<text transform="matrix(1 0 0 1 511.4969 469.0367)" font-family="'MicrosoftYaHei'" font-size="17.9753">23</text>
+<line id="BL06" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="428.9" y1="461.5" x2="456.1" y2="461.5"/>
+<line id="GB21" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="427.1" y1="461" x2="379.4" y2="461"/>
+<text transform="matrix(1 0 0 1 394.8658 467.0362)" font-family="'MicrosoftYaHei'" font-size="17.9753">24</text>
+<line id="BL07" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="351.1" y1="461" x2="378.3" y2="461"/>
+<line id="GB22" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="349.6" y1="461" x2="219.4" y2="461"/>
+<line id="BL08" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="190.9" y1="461" x2="218.1" y2="461"/>
+<text transform="matrix(1 0 0 1 278.6087 467.0361)" font-family="'MicrosoftYaHei'" font-size="17.9753">25</text>
+<line id="GB23" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="190.1" y1="461.5" x2="142.3" y2="461.5"/>
+<text transform="matrix(1 0 0 1 158.4534 467.2727)" font-family="'MicrosoftYaHei'" font-size="17.9753">26</text>
+<line id="BL09" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="114.3" y1="461.5" x2="141.5" y2="461.5"/>
+<line id="GB24" fill="none" stroke="#B3B3B3" stroke-width="20" stroke-miterlimit="10" x1="113.1" y1="461" x2="65.4" y2="461"/>
+<text transform="matrix(1 0 0 1 78.7751 467.5009)" font-family="'MicrosoftYaHei'" font-size="17.9753">27</text>
+<line id="HUACAO01" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="1074.2" y1="393.1" x2="1074.2" y2="444.1"/>
+<line id="HUACAO02" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="915.1" y1="393.1" x2="915.1" y2="444.1"/>
+<line id="HUACAO03" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="838.8" y1="393.1" x2="838.8" y2="444.1"/>
+<line id="HUACAO04" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="679.5" y1="393.1" x2="679.5" y2="444.1"/>
+<line id="HUACAO05" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="602.5" y1="393.1" x2="602.5" y2="444.1"/>
+<line id="HUACAO06" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="442.5" y1="393.1" x2="442.5" y2="444.1"/>
+<line id="HUACAO07" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="364.1" y1="393.1" x2="364.1" y2="444.1"/>
+<line id="HUACAO08" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="204.5" y1="393.1" x2="204.5" y2="444.1"/>
+<line id="HUACAO09" fill="none" stroke="#B3B3B3" stroke-width="30" stroke-miterlimit="10" x1="127.9" y1="393.1" x2="127.9" y2="444.1"/>
+<line id="SCANER01" fill="none" stroke="#B3B3B3" stroke-width="40" stroke-miterlimit="10" x1="1038.6" y1="309" x2="1086.5" y2="309"/>
+<text transform="matrix(0.9226 0 0 1 1039.7185 287.1938)" font-family="'MicrosoftYaHei'" font-size="17.7085">六面扫</text>
+<line id="SEN01" fill="none" stroke="#B3B3B3" stroke-width="5" stroke-miterlimit="10" x1="1033.9" y1="338.9" x2="1033.9" y2="279"/>
+<line id="SEN02" fill="none" stroke="#B3B3B3" stroke-width="5" stroke-miterlimit="10" x1="1095.4" y1="491.4" x2="1095.4" y2="431.5"/>
+<line id="SEN03" fill="none" stroke="#B3B3B3" stroke-width="5" stroke-miterlimit="10" x1="936.9" y1="490" x2="936.9" y2="430.1"/>
+<line id="SEN04" fill="none" stroke="#B3B3B3" stroke-width="5" stroke-miterlimit="10" x1="859.8" y1="491.4" x2="859.8" y2="431.5"/>
+<line id="SEN05" fill="none" stroke="#B3B3B3" stroke-width="5" stroke-miterlimit="10" x1="701.7" y1="490" x2="701.7" y2="430.1"/>
+<line id="SEN06" fill="none" stroke="#B3B3B3" stroke-width="5" stroke-miterlimit="10" x1="623.6" y1="491.4" x2="623.6" y2="431.5"/>
+<line id="SEN07" fill="none" stroke="#B3B3B3" stroke-width="5" stroke-miterlimit="10" x1="463.4" y1="491.4" x2="463.4" y2="431.5"/>
+<line id="SEN08" fill="none" stroke="#B3B3B3" stroke-width="5" stroke-miterlimit="10" x1="385" y1="490" x2="385" y2="430.1"/>
+<line id="SEN09" fill="none" stroke="#B3B3B3" stroke-width="5" stroke-miterlimit="10" x1="226.1" y1="491.4" x2="226.1" y2="431.5"/>
+<line id="SEN10" fill="none" stroke="#B3B3B3" stroke-width="5" stroke-miterlimit="10" x1="148.8" y1="491.4" x2="148.8" y2="431.5"/>
+<line id="JT02" fill="none" stroke="#B3B3B3" stroke-width="12" stroke-miterlimit="10" x1="22.6" y1="326.1" x2="10.3" y2="326.1"/>
+<line id="JT03" fill="none" stroke="#B3B3B3" stroke-width="12" stroke-miterlimit="10" x1="194.6" y1="281.3" x2="182.3" y2="281.3"/>
+<line id="JT04" fill="none" stroke="#B3B3B3" stroke-width="12" stroke-miterlimit="10" x1="499" y1="339.3" x2="486.7" y2="339.3"/>
+<line id="JT05" fill="none" stroke="#B3B3B3" stroke-width="12" stroke-miterlimit="10" x1="1176.4" y1="295.3" x2="1164.1" y2="295.3"/>
+<line id="JT06" fill="none" stroke="#B3B3B3" stroke-width="12" stroke-miterlimit="10" x1="1045" y1="439.5" x2="1032.7" y2="439.5"/>
+<line id="JT07" fill="none" stroke="#B3B3B3" stroke-width="12" stroke-miterlimit="10" x1="889.6" y1="439.3" x2="877.3" y2="439.3"/>
+<line id="JT08" fill="none" stroke="#B3B3B3" stroke-width="12" stroke-miterlimit="10" x1="772.1" y1="492.4" x2="759.8" y2="492.4"/>
+<line id="JT09" fill="none" stroke="#B3B3B3" stroke-width="12" stroke-miterlimit="10" x1="658.8" y1="439.5" x2="646.5" y2="439.5"/>
+<line id="JT10" fill="none" stroke="#B3B3B3" stroke-width="12" stroke-miterlimit="10" x1="420.6" y1="439.5" x2="408.3" y2="439.5"/>
+<line id="JT11" fill="none" stroke="#B3B3B3" stroke-width="12" stroke-miterlimit="10" x1="182.9" y1="438.7" x2="170.6" y2="438.7"/>
+<line id="JT21" fill="none" stroke="#B3B3B3" stroke-width="25" stroke-miterlimit="10" x1="116.2" y1="501.7" x2="139.6" y2="501.7"/>
+<line id="JT20" fill="none" stroke="#B3B3B3" stroke-width="25" stroke-miterlimit="10" x1="193.1" y1="501.7" x2="216.5" y2="501.7"/>
+<line id="JT19" fill="none" stroke="#B3B3B3" stroke-width="25" stroke-miterlimit="10" x1="353.6" y1="501.7" x2="377" y2="501.7"/>
+<line id="JT18" fill="none" stroke="#B3B3B3" stroke-width="25" stroke-miterlimit="10" x1="431.1" y1="501.7" x2="454.5" y2="501.7"/>
+<line id="JT17" fill="none" stroke="#B3B3B3" stroke-width="25" stroke-miterlimit="10" x1="590.7" y1="501.7" x2="614.1" y2="501.7"/>
+<line id="JT16" fill="none" stroke="#B3B3B3" stroke-width="25" stroke-miterlimit="10" x1="667.9" y1="501.7" x2="691.4" y2="501.7"/>
+<line id="JT15" fill="none" stroke="#B3B3B3" stroke-width="25" stroke-miterlimit="10" x1="827.3" y1="501.7" x2="850.7" y2="501.7"/>
+<line id="JT14" fill="none" stroke="#B3B3B3" stroke-width="25" stroke-miterlimit="10" x1="903.4" y1="501.7" x2="926.8" y2="501.7"/>
+<line id="JT13" fill="none" stroke="#B3B3B3" stroke-width="25" stroke-miterlimit="10" x1="1062.4" y1="501.7" x2="1085.8" y2="501.7"/>
+<line id="SEN11" fill="none" stroke="#B3B3B3" stroke-width="5" stroke-miterlimit="10" x1="71.4" y1="491.4" x2="71.4" y2="431.5"/>
+<text transform="matrix(0.9741 0 0 1 1056.877 390.3438)" font-family="'MicrosoftYaHei'" font-size="11.6645">滑槽01</text>
+<text transform="matrix(0.9741 0 0 1 897.5687 390.3438)" font-family="'MicrosoftYaHei'" font-size="11.6645">滑槽02</text>
+<text transform="matrix(0.9741 0 0 1 822.3372 390.3438)" font-family="'MicrosoftYaHei'" font-size="11.6645">滑槽03</text>
+<text transform="matrix(0.9741 0 0 1 662.0688 390.3437)" font-family="'MicrosoftYaHei'" font-size="11.6645">滑槽04</text>
+<text transform="matrix(0.9741 0 0 1 585.0894 390.3437)" font-family="'MicrosoftYaHei'" font-size="11.6645">滑槽05</text>
+<text transform="matrix(0.9741 0 0 1 427.1454 390.3433)" font-family="'MicrosoftYaHei'" font-size="11.6645">滑槽06</text>
+<text transform="matrix(0.9741 0 0 1 345.624 390.3433)" font-family="'MicrosoftYaHei'" font-size="11.6645">滑槽07</text>
+<text transform="matrix(0.9741 0 0 1 188.6471 390.3438)" font-family="'MicrosoftYaHei'" font-size="11.6645">滑槽08</text>
+<text transform="matrix(0.9741 0 0 1 111.1099 390.3438)" font-family="'MicrosoftYaHei'" font-size="11.6645">滑槽09</text>
+<text transform="matrix(0.97 0 0 1 1.9995 343.6973)" font-family="'MicrosoftYaHei'" font-size="11.9759">急停01</text>
+<text transform="matrix(1 0 0 1 170.64 271.9928)" font-family="'MicrosoftYaHei'" font-size="13.988">急停02</text>
+<text transform="matrix(1 0 0 1 475.2161 358.4251)" font-family="'MicrosoftYaHei'" font-size="13.988">急停03</text>
+<text transform="matrix(1 0 0 1 1144.2031 287.1938)" font-family="'MicrosoftYaHei'" font-size="13.988">急停04</text>
+<text transform="matrix(1 0 0 1 1014.1789 430.9546)" font-family="'MicrosoftYaHei'" font-size="13.988">急停05</text>
+<text transform="matrix(0.8763 0 0 1 861.5449 429.2871)" font-family="'MicrosoftYaHei'" font-size="13.8302">急停06</text>
+<text transform="matrix(1 0 0 1 743.4392 513.5674)" font-family="'MicrosoftYaHei'" font-size="13.988">急停07</text>
+<text transform="matrix(0.9104 0 0 1 626.3262 430.418)" font-family="'MicrosoftYaHei'" font-size="13.3175">急停08</text>
+<text transform="matrix(0.9104 0 0 1 388.7818 430.0846)" font-family="'MicrosoftYaHei'" font-size="13.3175">急停09</text>
+<text transform="matrix(0.9104 0 0 1 150.9248 429.2867)" font-family="'MicrosoftYaHei'" font-size="13.3175">急停10</text>
+<line id="JT12" fill="none" stroke="#B3B3B3" stroke-width="12" stroke-miterlimit="10" x1="22.6" y1="495.2" x2="10.3" y2="495.2"/>
+<text transform="matrix(0.9104 0 0 1 3.2601 518.9875)" font-family="'MicrosoftYaHei'" font-size="13.3175">急停11</text>
+<text transform="matrix(1 0 0 1 1037.4844 550.0801)" enable-background="new    "><tspan x="0" y="0" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="15.4653">摆轮急停</tspan><tspan x="61.9" y="0" font-family="'ArialMT'" font-size="15.4653">01</tspan></text>
+<text transform="matrix(1 0 0 1 883.6707 550.0795)" enable-background="new    "><tspan x="0" y="0" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="15.4653">摆轮急停</tspan><tspan x="61.9" y="0" font-family="'ArialMT'" font-size="15.4653">02</tspan></text>
+<text transform="matrix(1 0 0 1 794.7355 550.08)" enable-background="new    "><tspan x="0" y="0" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="15.4653">摆轮急停</tspan><tspan x="61.9" y="0" font-family="'ArialMT'" font-size="15.4653">03</tspan></text>
+<text transform="matrix(1 0 0 1 652.6783 550.0794)" enable-background="new    "><tspan x="0" y="0" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="15.4653">摆轮急停</tspan><tspan x="61.9" y="0" font-family="'ArialMT'" font-size="15.4653">04</tspan></text>
+<text transform="matrix(1 0 0 1 555.7108 550.0794)" enable-background="new    "><tspan x="0" y="0" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="15.4653">摆轮急停</tspan><tspan x="61.9" y="0" font-family="'ArialMT'" font-size="15.4653">05</tspan></text>
+<text transform="matrix(1 0 0 1 415.7094 550.0794)" enable-background="new    "><tspan x="0" y="0" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="15.4653">摆轮急停</tspan><tspan x="61.9" y="0" font-family="'ArialMT'" font-size="15.4653">06</tspan></text>
+<text transform="matrix(1 0 0 1 319.5684 550.0795)" enable-background="new    "><tspan x="0" y="0" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="15.4653">摆轮急停</tspan><tspan x="61.9" y="0" font-family="'ArialMT'" font-size="15.4653">07</tspan></text>
+<text transform="matrix(1 0 0 1 176.9541 550.0795)" enable-background="new    "><tspan x="0" y="0" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="15.4653">摆轮急停</tspan><tspan x="61.9" y="0" font-family="'ArialMT'" font-size="15.4653">08</tspan></text>
+<text transform="matrix(1 0 0 1 74.6493 550.0795)" enable-background="new    "><tspan x="0" y="0" font-family="'AdobeSongStd-Light-GBpc-EUC-H'" font-size="15.4653">摆轮急停</tspan><tspan x="61.9" y="0" font-family="'ArialMT'" font-size="15.4653">09</tspan></text>
+<text transform="matrix(1 0 0 1 997.9959 279.0477)" font-family="'MicrosoftYaHei'" font-size="13.988">PH08</text>
+<text transform="matrix(1 0 0 1 1089.5037 503.5675)" font-family="'MicrosoftYaHei'" font-size="13.988">PH12</text>
+<text transform="matrix(1 0 0 1 932.0206 503.5673)" font-family="'MicrosoftYaHei'" font-size="13.988">PH13</text>
+<text transform="matrix(1 0 0 1 856.5452 503.5674)" font-family="'MicrosoftYaHei'" font-size="13.988">PH14</text>
+<text transform="matrix(1 0 0 1 696.9048 503.5671)" font-family="'MicrosoftYaHei'" font-size="13.988">PH15</text>
+<text transform="matrix(1 0 0 1 619.6017 503.5673)" font-family="'MicrosoftYaHei'" font-size="13.988">PH16</text>
+<text transform="matrix(1 0 0 1 461.7205 503.567)" font-family="'MicrosoftYaHei'" font-size="13.988">PH17</text>
+<text transform="matrix(1 0 0 1 380.0878 503.5678)" font-family="'MicrosoftYaHei'" font-size="13.988">PH18</text>
+<text transform="matrix(1 0 0 1 223.155 503.5677)" font-family="'MicrosoftYaHei'" font-size="13.988">PH19</text>
+<text transform="matrix(1 0 0 1 145.1218 503.5676)" font-family="'MicrosoftYaHei'" font-size="13.988">PH20</text>
+<text transform="matrix(1 0 0 1 64.3546 503.5677)" font-family="'MicrosoftYaHei'" font-size="13.988">PH21</text>
+<ellipse id="JT01" fill="none" stroke="#B3B3B3" stroke-width="16" stroke-miterlimit="10" cx="559.5" cy="205.7" rx="6" ry="2.7"/>
+<ellipse id="BUTTON05" fill="none" stroke="#B3B3B3" stroke-width="16" stroke-miterlimit="10" cx="514" cy="205.5" rx="6" ry="2.7"/>
+<text transform="matrix(1 0 0 1 479.7157 231.2912)" font-family="'MicrosoftYaHei'" font-size="13.988">分拣模式</text>
+<text transform="matrix(1 0 0 1 540.8949 231.2932)" font-family="'MicrosoftYaHei'" font-size="13.988">主柜急停01</text>
+<text transform="matrix(1 0 0 1 988.5027 109.0814)" font-family="'MicrosoftYaHei'" font-size="48">GB</text>
+</svg>

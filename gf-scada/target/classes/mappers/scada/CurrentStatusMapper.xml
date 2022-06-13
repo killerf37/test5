@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ginfon.scada.event.mapper.SelectStatusMapper">
+    <resultMap id="logResult" type="com.ginfon.scada.entity.CurrentStatus">
+        <result property="id" column="id"/>
+        <result property="parentlineNo" column="parentlineNo"/>
+        <result property="lineNo" column="lineNo"/>
+        <result property="stateId" column="stateId"/>
+        <result property="type" column="type"/>
+        <result property="startime" column="startime"/>
+        <result property="endtime" column="endtime"/>
+        <result property="classes" column="classes"/>
+    </resultMap>
+
+    <select id="selectcurrentsta" resultMap="logResult">
+        SELECT id,parentlineNo,lineNo,stateId,type,startime,endtime
+        FROM t_status WHERE type=1
+        ORDER BY id DESC limit 20
+    </select>
+
+    <select id="selectallsta" parameterType="com.ginfon.scada.entity.CurrentStatus" resultMap="logResult">
+        SELECT id,parentlineNo,lineNo,stateId,type,DATE_FORMAT(startime,'%Y-%m-%d %H:%i:%s') as startime,DATE_FORMAT(endtime,'%Y-%m-%d %H:%i:%s') as endtime
+        FROM t_status
+        <where>
+            <if test="parentlineNo !=null and parentlineNo !=''">and parentlineNo = #{parentlineNo}</if>
+            <if test="startime != null and startime !=''">and DATE_FORMAT(startime,'%Y-%m-%d %H:%i:%s')  &gt;= #{startime}</if>
+            <if test="endtime != null and endtime !=''">and DATE_FORMAT(startime,'%Y-%m-%d %H:%i:%s')  &lt;= #{endtime}</if>
+        </where>
+        ORDER BY id DESC
+    </select>
+
+</mapper>

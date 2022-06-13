@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include :: header"></head>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/ace/css/ace.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link th:href="@{/ajax/libs/bootstrap-table/bootstrap-table.min.css}" rel="stylesheet"/>
+    <link type="text/css" href="combo.select.css"/>
+    <link href="/ajax/libs/select/select2.css">
+    <script type="text/javascript" th:src='@{/js/jquery.min.js}'></script>
+    <script type="text/javascript" src="/js/jquery.combo.select.js"></script>
+    <script src="/ajax/libs/select/select2.js"></script>
+    <script src="/js/jquery-1.11.3.min.js"></script>
+    <script th:src="@{/js/stomp.min.js}"></script>
+    <script th:src="@{/js/sockjs.min.js}"></script>
+    <script type="text/javascript" th:src='@{/js/echarts.min.js}'></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <style>
+
+    </style>
+    <title>布局图</title>
+</head>
+<body style="width: 100%;">
+<div class="wrapper wrapper-content">
+    <i id="openScreen" onclick="openScreen();" class="fa fa-arrows-alt"
+       style="float:right;font-size: large;"></i>
+    <i id="closeScreen" onclick="closeScreen();" class="fa fa-compress"
+       style="float:right;display: none;font-size: large;"></i>
+    <div>
+        <div style="margin: 0px 0px 10px 0px">
+            <li th:id="lab">线体颜色示意说明:</li>
+            <span style="margin-left:10px;">急停：<li th:id="jt" class="fa fa-circle" style="color: #FA321E"></li></span>
+            <span style="margin-left:10px;">故障：<li th:id="gz" class="fa fa-circle" style="color: #faf628"></li></span>
+            <span style="margin-left:10px;">堵包：<li th:id="db" class="fa fa-circle" style="color: #5d3cfa"></li></span>
+            <span style="margin-left:10px;">本地：<li th:id="bd" class="fa fa-circle" style="color: #faa930"></li></span>
+            <span style="margin-left:10px;">休眠,停止,就绪：<li th:id="tz" class="fa fa-circle" style="color: #808080"></li></span>
+            <span style="margin-left:10px;">运行：<li th:id="yx" class="fa fa-circle" style="color: #1cc09f"></li></span>
+            <span style="margin-left:10px;">离线：<li th:id="lx" class="fa fa-circle" style="color: #2f4050"></li></span>
+        </div>
+        <div th:attr="data-f=${linename0}" th:utext="${sca0}"></div>
+    </div>
+</div>
+<script th:inline="javascript">
+    var maplineNo = [[${lineNameNo}]];//CA:01 CB:02这种，线体名称和线号
+    var mapNo = [[${mapNo}]];//1:CA.SVG  2：CB.svg这种,表示文件序号
+    var mapcount = [[${count}]];//svg图的数量
+    var lineNoName = [[${lineNoName}]];//01:CA  02:CB这种
+    var eleNameMap = [[${elename}]];//元素名称map，key为type，value为elename
+    var errinfo=[[${errinfo}]];//异常信息
+    var errdescrib=[[${errdescrib}]];//异常信息描述//传递设备异常描述<type:<异常码Int:异常信息String>>
+    var typedescrib=[[${typedescrib}]];//种类描述//传递设备类型名称<type:类型名称String>
+    var eventQueryName = [[${@messageUtils.message("event.query")}]];
+    var lineNo=[[${lineNo}]];
+    var lineip=[[${lineip}]]
+    //加载时计算高度和宽度
+    onload = function () {
+        // let width = $(".map svg").css("width");
+        // $(".map svg").css("height",width)
+    }
+    //全屏
+    function openScreen() {
+        var element = document.documentElement;
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+        }
+        var div_h = $(window).height()
+        $(".map svg").css("height",(div_h - 45) / 3 + "px")
+    }
+
+    //退出全屏
+    function closeScreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+        var div_h = $(window).height() - 85
+        $(".map svg").css("height",(div_h - 235) / 3 + "px")
+    }
+
+    //Scada布局自适应
+    /* function resize() {
+         var div_h = $(window).height() - 85;
+         if (div_h != 24) {
+             $("#Layer" + layerNo).children(":first").attr("width", "100%");
+             $("#Layer" + layerNo).children(":first").attr("height", div_h - 235);
+             $("#Layer" + layerNo).children(":first").attr("style", "overflow-y:auto;height:" + (div_h - 235) + "px;");
+             $("#Layer" + layerNo).css("padding-top", (0));
+             $("#tabledata").attr("height", 235);
+             $("#tabledata").attr("style", "height:235px;margin-top:10px;");
+         }
+     }*/
+
+
+    //全屏事件监听
+    document.addEventListener("fullscreenchange", function (event) {
+        if (document.fullscreen === false ){
+            $("#openScreen").css("display","block");
+            $("#closeScreen").css("display","none");
+        }else{
+            $("#openScreen").css("display","none");
+            $("#closeScreen").css("display","block");
+        }
+    }, false);
+    document.addEventListener("msfullscreenchange", function (event) {
+        if (document.msFullscreenElement === false ){
+            $("#openScreen").css("display","block");
+            $("closeScreen").css("display","none");
+        }else{
+            $("#openScreen").css("display","none");
+            $("#closeScreen").css("display","block");
+        }
+    }, false);
+    document.addEventListener("mozfullscreenchange", function (event) {
+        if (document.mozFullScreen === false ){
+            $("#openScreen").css("display","block");
+            $("#closeScreen").css("display","none");
+        }else{
+            $("#openScreen").css("display","none");
+            $("#closeScreen").css("display","block");
+        }
+    }, false);
+    document.addEventListener("webkitfullscreenchange", function (event) {
+        if (document.webkitIsFullScreen === false ){
+            $("#openScreen").css("display","block");
+            $("#closeScreen").css("display","none");
+        }else{
+            $("#openScreen").css("display","none");
+            $("#closeScreen").css("display","block");
+        }
+    }, false);
+</script>
+<!--<div th:include="include :: footer"></div>-->
+<script th:src="@{/js/monitor/layout1.js}"></script>
+</body>
+</html>
